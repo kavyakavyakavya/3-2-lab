@@ -1,0 +1,123 @@
+_____________________________________________________________________________________________________________________________________________________________________
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class KnapsackItem {
+    int weight;
+    int value;
+
+    public KnapsackItem(int weight, int value) {
+        this.weight = weight;
+        this.value = value;
+    }
+}
+
+public class GreedyKnapsack {
+
+    public static double optimalKnapsack(int capacity, KnapsackItem[] items) {
+        Arrays.sort(items, Comparator.comparingDouble(item -> (double) item.value / item.weight));
+
+        double totalValue = 0.0;
+        int remainingCapacity = capacity;
+
+        for (int i = items.length - 1; i >= 0; i--) {
+            if (remainingCapacity >= items[i].weight) {
+                totalValue += items[i].value;
+                remainingCapacity -= items[i].weight;
+            }
+        }
+
+        return totalValue;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the knapsack capacity: ");
+        int capacity = scanner.nextInt();
+
+        System.out.print("Enter the number of objects: ");
+        int n = scanner.nextInt();
+
+        KnapsackItem[] items = new KnapsackItem[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for object " + (i + 1));
+            System.out.print("Weight: ");
+            int weight = scanner.nextInt();
+            System.out.print("Value: ");
+            int value = scanner.nextInt();
+
+            items[i] = new KnapsackItem(weight, value);
+        }
+
+        double result = optimalKnapsack(capacity, items);
+
+        System.out.println("Optimal Knapsack Profit: " + result);
+
+        scanner.close();
+    }
+}
+________________________________________________________________________________________________________________________________________________________________________________
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.Scanner;
+
+class KnapsackItem {
+    int weight;
+    int value;
+
+    public KnapsackItem(int weight, int value) {
+        this.weight = weight;
+        this.value = value;
+    }
+}
+
+public class UserInputGreedyKnapsack {
+
+    public static double optimalKnapsack(int capacity, KnapsackItem[] items) {
+        Arrays.sort(items, Comparator.comparingDouble(item -> (double) item.value / item.weight));
+
+        double totalValue = 0.0;
+        int remainingCapacity = capacity;
+
+        for (int i = items.length - 1; i >= 0; i--) {
+            if (remainingCapacity >= items[i].weight) {
+                System.out.println("Added object with weight " + items[i].weight + " and value " + items[i].value);
+                totalValue += items[i].value;
+                remainingCapacity -= items[i].weight;
+            }
+        }
+
+        return totalValue;
+    }
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.print("Enter the knapsack capacity: ");
+        int capacity = scanner.nextInt();
+
+        System.out.print("Enter the number of objects: ");
+        int n = scanner.nextInt();
+
+        KnapsackItem[] items = new KnapsackItem[n];
+
+        for (int i = 0; i < n; i++) {
+            System.out.println("Enter details for object " + (i + 1));
+            System.out.print("Weight: ");
+            int weight = scanner.nextInt();
+            System.out.print("Value: ");
+            int value = scanner.nextInt();
+
+            items[i] = new KnapsackItem(weight, value);
+        }
+
+        double result = optimalKnapsack(capacity, items);
+
+        System.out.println("Optimal Knapsack Profit: " + result);
+
+        scanner.close();
+    }
+}
